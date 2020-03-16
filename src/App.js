@@ -5,7 +5,7 @@ import BottomRow from "./BottomRow";
 
 function App() {
   //TODO: STEP 2 - Establish your applictaion's state with some useState hooks.  You'll need one for the home score and another for the away score.
-
+//set the score
   const [homeScore, setHomeScore] = useState(0);
   const [awayScore, setAwayScore] = useState(0);
 
@@ -25,6 +25,16 @@ function App() {
     setAwayScore(awayScore + 3);
   }
 
+  //set the quarter
+  const [quarter, setQuarter] = useState(1);
+
+  const incrementQuarter = e => {
+    if (quarter === 4) {
+      setQuarter(1);
+    } else {
+      setQuarter(quarter + 1);
+    }
+  }
   
   
   return (
@@ -44,7 +54,7 @@ function App() {
             <div className="away__score">{awayScore}</div>
           </div>
         </div>
-        <BottomRow />
+        <BottomRow quarter = {quarter} setQuarter = {setQuarter}/>
       </section>
       <section className="buttons">
         <div className="homeButtons">
@@ -55,6 +65,9 @@ function App() {
         <div className="awayButtons">
           <button className="awayButtons__touchdown" onClick = {scoreAwayTouchdown}>Away Touchdown</button>
           <button className="awayButtons__fieldGoal" onClick = {scoreAwayFieldGoal}>Away Field Goal</button>
+        </div>
+        <div className = "quarter">
+          <button className = "quarter_incrementer" onClick={incrementQuarter}>New Quarter</button>
         </div>
       </section>
     </div>
